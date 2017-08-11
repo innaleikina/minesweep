@@ -1,2 +1,7 @@
-const blankLine = ' | | ';
-console.log('This is what an empty board would look like:' ${blankLine blankLine blankLine})
+const generatePlayerBoard = (numberoORows, numberOfColumns) => {
+let board = [];
+
+for(numberOfRowsIndex=0; numberOfRowsIndex < numberOfRows.length; numberOfRowsIndex++){
+  let row =[];
+}
+};
