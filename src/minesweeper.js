@@ -21,9 +21,9 @@ const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
         row.push(null);
       }
       board.push(row);
-    }
+     }
     return board;
-
+    };
 
     let numberOfBombsPlaced = 0;
 
@@ -37,5 +37,11 @@ const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
     numberOfBombsPlaced++;
 };
 
-const printBoard = console.log(board.map(row => row.join(' | ')).join('/n')
-);
+const printBoard = console.log(board.map(row => row.join(' | ')).join('/n')) => {
+}
+
+let playerBoard = generatePlayerBoard(3,4);
+let bombBoard = generateBombBoard(5,5,5);
+
+console.log('Player Board: ' + printBoard(playerBoard));
+console.log('Bomb Board: ' + printBoard(bombBoard));
