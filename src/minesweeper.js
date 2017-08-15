@@ -54,8 +54,11 @@ const getNumberOfNeighborBombs = (bombBoard, rowIndex, columnIndex) => {
 
 const flipTile = (playerBoard,bombBoard,rowIndex,columnIndex) => {
   if (playerBoard[rowIndex][columnIndex] !== ' '){
+  console.log('This tile has already been flipped!');
+  return;
+} else if (bombBoard[rowIndex][columnIndex] === 'B'){
 
-  }
+}
 }
 
 
