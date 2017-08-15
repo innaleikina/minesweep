@@ -18,7 +18,7 @@ const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
   for(let numberOfRowsIndex=0; numberOfRowsIndex < numberOfRows; numberOfRowsIndex++){
     let row =[];
       for (let numberOfColumnsIndex = 0; numberOfColumnsIndex < numberOfColumns; numberOfColumnsIndex++) {
-        row.push(null);
+        row.push(" ");
       }
       board.push(row);
      }
@@ -32,8 +32,6 @@ const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
        board[randomRowIndex][randomColumnIndex] = 'B';
        numberOfBombsPlaced++;
      }
-    board[randomRowIndex][randomColumnIndex] = 'B';
-     numberOfBombsPlaced++;
      }
      return board;
     };
@@ -48,11 +46,17 @@ const getNumberOfNeighborBombs = (bombBoard, rowIndex, columnIndex) => {
   const neighborRowIndex = rowIndex += offset[0];
   if (neighborRowIndex >= 0 && neighborRowIndex < numberOfRows && neighborColumnsIndex >= 0 && neighborColumnsIndex < numberOfColumns)
   if(bombBoard[neighborRowIndex]['B'] == 'B'){
-  numberOfBombs++;  
+  numberOfBombs++;
   }
   });
+  return numberOfBombs;
 };
 
+const flipTile = (playerBoard,bombBoard,rowIndex,columnIndex) => {
+  if (playerBoard[rowIndex][columnIndex] !== ' '){
+
+  }
+}
 
 
 const printBoard =  (board) => {console.log(board.map(row => row.join(' | ')).join('\n'))
@@ -61,5 +65,7 @@ const printBoard =  (board) => {console.log(board.map(row => row.join(' | ')).jo
 let playerBoard = generatePlayerBoard(3,4);
 let bombBoard = generateBombBoard(5,5,5);
 
-console.log('Player Board: ' + printBoard(playerBoard));
-console.log('Bomb Board: ' + printBoard(bombBoard));
+console.log('Player Board:');
+printBoard(playerBoard);
+console.log('Bomb Board:');
+printBoard(bombBoard);
