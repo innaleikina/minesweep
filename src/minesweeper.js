@@ -1,3 +1,30 @@
+class Board {
+  constructor(numberOfRows,numberOfColumns,numberOfBombs){
+    this._numberOfBombs = numberOfBombs;
+    this._numberOfTiles = numberOfRows * numberOfColumns
+    this._playerBoard = Board.generatePlayerBoard(numberOfColumns, numberOfRows);
+    this._bombBoard = Board.generateBombBoard(numberOfRows,numberOfColumns,numberOfBombs);
+
+    }
+    get playerBoard(){
+      return _playerBoard
+  };
+  flipTile = (rowIndex,columnIndex) => {
+      if (this._playerBoard[rowIndex][columnIndex] !== ' '){
+      return;
+    }
+    if (this._bombBoard[rowIndex][columnIndex] === 'B'){
+      this._playerBoard[rowIndex][columnIndex] = 'B';
+    } else {
+      this._playerBoard[rowIndex][columnIndex] = getNumberOfNeighborBombs(rowIndex,columnIndex);
+    }
+    this._numberOfTiles--;
+    };
+};
+
+
+
+
 const generatePlayerBoard = (numberOfRows, numberOfColumns) => {
 let board = [];
 
@@ -43,10 +70,10 @@ const getNumberOfNeighborBombs = (bombBoard, rowIndex, columnIndex) => {
   let numberOfBombs = 0;
 
   neighborsOffsets.forEach(offset =>{
-  const neighborRowIndex = rowIndex += offset[0];
-  const neighborColumnIndex = columnIndex += offset[0];
+  const neighborRowIndex = rowIndex + offset[0];
+  const neighborColumnIndex = columnIndex + offset[1];
   if (neighborRowIndex >= 0 && neighborRowIndex < numberOfRows && neighborColumnIndex >= 0 && neighborColumnIndex < numberOfColumns){
-  if(bombBoard[neighborRowIndex]['B'] == 'B'){
+  if(bombBoard[neighborRowIndex][neighborColumnIndex] === 'B'){
   numberOfBombs++;
   }
 }
@@ -54,23 +81,13 @@ const getNumberOfNeighborBombs = (bombBoard, rowIndex, columnIndex) => {
   return numberOfBombs;
 };
 
-const flipTile = (playerBoard,bombBoard,rowIndex,columnIndex) => {
-  if (playerBoard[rowIndex][columnIndex] !== ' '){
-  return;
-}
-if (bombBoard[rowIndex][columnIndex] === 'B'){
-  playerBoard[rowIndex][columnIndex] = 'B';
-} else {
-  playerBoard[rowIndex][columnIndex] = getNumberOfNeighborBombs(bombBoard,rowIndex,columnIndex);
-}
-};
 
 
 const printBoard =  (board) => {console.log(board.map(row => row.join(' | ')).join('\n'));
 };
 
 let playerBoard = generatePlayerBoard(5,5);
-let bombBoard = generateBombBoard(5,5,5);
+let bombBoard = generateBombBoard(5,5,13);
 
 console.log('Player Board:');
 printBoard(playerBoard);
